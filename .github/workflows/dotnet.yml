@@ -63,5 +63,3 @@ jobs:
         asset_path: bin/Release/WindowsService1.exe
         asset_name: IMSServer.exe  
         asset_content_type: application/octet-stream
-        asset_name: IMSClient.exe  
-        asset_content_type: application/octet-stream
