@@ -9,8 +9,16 @@ on:
 
 jobs:
   build:
+  
+    strategy:
+        matrix:
+          configuration: [Release]
+          
     runs-on: windows-latest
 
+    env:
+      Solution_Name: WindowsService1.sln                         
+      
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -25,10 +33,10 @@ jobs:
       with:
         msbuild-architecture: x64
         
-    - name: Build Windows service
-      run: |
-        dotnet restore
-        dotnet build --configuration Release
+    - name: Restore the application
+      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+      env:
+        Configuration: ${{ matrix.configuration }}
 
   release:
     needs: build
